@@ -56,11 +56,13 @@
               </ul>
 
             </div>
-
+          {% if current_user.is_authenticated %}
 
             {{ ckeditor.load() }}
             {{ ckeditor.config(name='comment') }}
             {{ wtf.quick_form(c_form, novalidate=True, button_map={"submit": "primary"})  }}
+
+          {% endif %}
           </div>
       </div>
     </div>
