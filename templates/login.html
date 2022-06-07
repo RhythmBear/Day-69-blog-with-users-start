@@ -38,6 +38,22 @@
         {% endif %}
       {% endwith %}
 
+      {% with messages = get_flashed_messages(category_filter=['incorrect_password']) %}
+        {% if messages %}
+          {% for msg in messages %}
+            <p>{{ msg }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% with messages = get_flashed_messages(category_filter=['incorrect_username']) %}
+        {% if messages %}
+          {% for msg in messages %}
+            <p>{{ msg }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
       <div class="col-lg-8 col-md-10 mx-auto content">
         {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
       </div>
