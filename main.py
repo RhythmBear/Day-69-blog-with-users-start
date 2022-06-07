@@ -138,8 +138,9 @@ def login():
 
     if request.method == "POST" and login_form.validate_on_submit():
         user_exists = User.query.filter_by(email=login_form.email.data).first()
-        password = user_exists.password
+
         if user_exists:
+            password = user_exists.password
             password_correct = check_password_hash(pwhash=password,
                                                    password=login_form.password.data)
 
