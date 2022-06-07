@@ -175,8 +175,9 @@ def logout():
 
 @app.route("/post/<int:post_id>", methods=["GET", "POST"])
 def show_post(post_id):
-    requested_post = BlogPost.query.get(post_id)
-    requested_comments = Comment.query.filter_by(post_id=post_id).all()
+    requested_post = BlogPost.query.get(int(post_id))
+    print(requested_post)
+    requested_comments = Comment.query.filter_by(post_id=int(post_id)).all()
 
     new_comment_form = CommentForm()
     if request.method == "POST" and new_comment_form.validate_on_submit():
@@ -192,11 +193,9 @@ def show_post(post_id):
 
         return redirect(url_for('show_post', post_id=post_id))
 
-    return render_template("post.html",
-                           comments=requested_comments,
+    return render_template("post.html", comments=requested_comments,
                            c_form=new_comment_form,
-                           post=requested_post,
-                           user=current_user)
+                           post=requested_post,)
 
 
 @app.route("/about")
